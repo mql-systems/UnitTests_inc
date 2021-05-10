@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2021, Diamond Systems Corp."
 #property link      "https://diamondsystems.org"
-#property version   "0.01"
+#property version   "1.00"
 
 class UnitTest
 {
@@ -21,6 +21,7 @@ class UnitTest
       virtual void      TestMain() =NULL;
       //---
       void              TestStart(const string testName);
+      void              TestStep(const string stepDesc);
       bool              TestResult(const string testName, const bool result);
       virtual bool      TestMisc(const string testName = "TestMisc functions test") { return true; }
 };
@@ -63,6 +64,14 @@ void UnitTest::TestStart(const string testName)
 }
 
 //+------------------------------------------------------------------+
+//| Test step                                                        |
+//+------------------------------------------------------------------+
+void UnitTest::TestStep(const string stepDesc)
+{
+   PrintFormat("- %s", stepDesc);
+}
+
+//+------------------------------------------------------------------+
 //| Test result                                                      |
 //+------------------------------------------------------------------+
 bool UnitTest::TestResult(const string testName, const bool result)
@@ -70,10 +79,10 @@ bool UnitTest::TestResult(const string testName, const bool result)
    if (result)
    {
       m_TestsPassed++;
-      PrintFormat("%s passed",testName);
+      PrintFormat("%s passed\n",testName);
    }
    else
-      PrintFormat("%s failed",testName);
+      PrintFormat("%s failed\n",testName);
    
    return result;
 }
